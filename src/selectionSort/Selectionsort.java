@@ -2,7 +2,9 @@ package selectionSort;
 
 import java.util.Arrays;
 
-public class selectionsort {
+import Utilidade.util;
+
+public class Selectionsort {
 	
 	public static void main(String[] args) {
 		
@@ -13,7 +15,7 @@ public class selectionsort {
 		System.out.println(Arrays.toString(v));
 	}
 
-	private static void selectionSort(int[] v, int inicio, int fim) {
+	public static void selectionSort(int[] v, int inicio, int fim) {
 		
 		for(int j=inicio; j<=fim; j++) {
 			
@@ -28,19 +30,11 @@ public class selectionsort {
 			}
 			
 			if(v[j] > v[posMin]) {
-				troca(v, j, posMin);
+				util.swap(v, j, posMin);
 			}
 			
 		}
 			
-	}
-	
-	private static void troca(int[] v, int i, int j) {
-		
-		int aux = v[i];
-		v[i] = v[j];
-		v[j] = aux;
-		
 	}
 	
 }

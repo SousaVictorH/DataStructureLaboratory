@@ -1,8 +1,8 @@
-package bubbleSort;
+package insertionSort;
 
 import java.util.Arrays;
 
-public class recursivebubblesort {
+public class Recursiveinsertionsort {
 
 	public static void main(String[] args) {
 		
@@ -15,12 +15,12 @@ public class recursivebubblesort {
 		//int []v = {1, 5, 7, 9, 7, 5, 4, 2, 0};
 		//int []v = {1, 5, 7, 9, 7, 5, 4, 2, 0, -5};
 		
-		recursiveBubbleSort(v, 0, v.length-1);
+		recursiveInsertionSort(v, 0, v.length-1);
 		
 		System.out.println(Arrays.toString(v));
 	}
 
-	private static void recursiveBubbleSort(int[] v, int leftIndex, int rightIndex) {
+	public static void recursiveInsertionSort(int[] v, int leftIndex, int rightIndex) {
 		
 		if(leftIndex == rightIndex || leftIndex > rightIndex) {
 			return;
@@ -30,20 +30,17 @@ public class recursivebubblesort {
 			return;
 		}
 		
-		for(int i=0; i<rightIndex; i++) {
-			if(v[i] > v[i+1]) {
-				troca(v, i, i+1);
-			}
+		int x = v[leftIndex + 1];
+		int pos = leftIndex;
+		
+		while((pos >= 0) && (v[pos] > x)) {
+			v[pos+1] = v[pos];
+			pos--;
 		}
 		
-		recursiveBubbleSort(v, leftIndex+1, rightIndex);
-	}
-	
-	private static void troca(int[] v, int i, int j) {
+		v[pos+1] = x;
 		
-		int aux = v[i];
-		v[i] = v[j];
-		v[j] = aux;
+		recursiveInsertionSort(v, leftIndex+1, rightIndex);
 		
 	}
 	

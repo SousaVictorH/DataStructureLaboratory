@@ -1,8 +1,9 @@
 package selectionSort;
 
 import java.util.Arrays;
+import Utilidade.util;
 
-public class recursiveSelectionSort {
+public class RecursiveSelectionSort {
 
 	public static void main(String[] args) {
 		
@@ -21,7 +22,7 @@ public class recursiveSelectionSort {
 
 	}
 
-	private static void recursiveSelectionSort(int[] v, int leftIndex, int rightIndex) {
+	public static void recursiveSelectionSort(int[] v, int leftIndex, int rightIndex) {
 		
 		if(leftIndex > rightIndex) {
 			return;
@@ -42,18 +43,10 @@ public class recursiveSelectionSort {
 		}
 		
 		if(v[leftIndex] > v[posMin]) {
-			troca(v, leftIndex, posMin);
+			util.swap(v, leftIndex, posMin);
 		}
 		
 		recursiveSelectionSort(v, leftIndex+1, rightIndex);
-		
-	}
-	
-	private static void troca(int[] v, int i, int j) {
-		
-		int aux = v[i];
-		v[i] = v[j];
-		v[j] = aux;
 		
 	}
 

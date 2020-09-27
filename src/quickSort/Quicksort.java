@@ -1,11 +1,20 @@
-package QuickSort;
+package quickSort;
 import java.util.Arrays;
 
-public class quicksort {
+import Utilidade.util;
+
+public class Quicksort {
 
 	public static void main(String[] args) {
 		
 		int []v = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+		//int []v = {1, 2, 3, 4, 5, 6, 7 , 8, 9, 10};
+		
+		//int []v = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+		//int []v = {1, 2, 3, 4, 5, 6, 7 , 8, 9, 10, 11};
+
+		//int []v = {1, 5, 7, 9, 7, 5, 4, 2, 0};
+		//int []v = {1, 5, 7, 9, 7, 5, 4, 2, 0, -5};
 		
 		quickSort(v, 0, v.length-1);
 		
@@ -13,7 +22,7 @@ public class quicksort {
 		
 	}
 
-	private static void quickSort(int[] v, int esq, int dir) {
+	public static void quickSort(int[] v, int esq, int dir) {
 		
 		if(esq < dir) {
 			int j = separar(v, esq, dir);
@@ -31,23 +40,15 @@ public class quicksort {
 		for(int j=esq; j<dir; j++) {
 			
 			if(v[i] <= pivo) {
-				trocar(v, i, j);
+				util.swap(v, i, j);
 				i++;
 			}
 			
 		}
 		
-		trocar(v, i, dir);
+		util.swap(v, i, dir);
 		
 		return i;
-	}
-
-	private static void trocar(int[] v, int i, int j) {
-		
-		int aux = v[i];
-		v[i] = v[j];
-		v[j] = aux;
-		
 	}
 
 }

@@ -1,8 +1,10 @@
-package InsertionSort;
+package bubbleSort;
 
 import java.util.Arrays;
 
-public class insertionsort {
+import Utilidade.util;
+
+public class Bubblesort {
 
 	public static void main(String[] args) {
 		
@@ -15,28 +17,27 @@ public class insertionsort {
 		//int []v = {1, 5, 7, 9, 7, 5, 4, 2, 0};
 		//int []v = {1, 5, 7, 9, 7, 5, 4, 2, 0, -5};
 		
-		insertionSort(v, 0, v.length-1);
+		bubbleSort(v, 0, v.length-1);
 		
 		System.out.println(Arrays.toString(v));
 	}
 
-	private static void insertionSort(int[] v, int leftIndex, int rightIndex) {
+	public static void bubbleSort(int[] v, int leftIndex, int rightIndex) {
 		
-		int x,j;
-		
-		for(int i=leftIndex+1; i <= rightIndex; i++) {
+		for(int i = leftIndex; i < rightIndex; i++) {
 			
-			x = v[i];
-			j = i - 1;
-			
-			while((j >= 0) && (v[j] > x)) {
-				v[j+1] = v[j];
-				j--;
+			for(int j = rightIndex; j > i ; j--) {
+				
+				if(v[j] < v[j-1]) {
+					
+					util.swap(v, j, j-1);
+					
+				}
+				
 			}
 			
-			v[j+1] = x;
 		}
 		
 	}
-
+	
 }

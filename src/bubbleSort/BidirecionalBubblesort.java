@@ -2,7 +2,9 @@ package bubbleSort;
 
 import java.util.Arrays;
 
-public class bidirecionalbubblesort {
+import Utilidade.util;
+
+public class BidirecionalBubblesort {
 
 	public static void main(String[] args) {
 		
@@ -20,19 +22,19 @@ public class bidirecionalbubblesort {
 		System.out.println(Arrays.toString(v));
 	}
 
-	private static void bidirecionalBubbleSort(int[] v, int leftIndex, int rightIndex) {
+	public static void bidirecionalBubbleSort(int[] v, int leftIndex, int rightIndex) {
 		
 		for(int i = leftIndex; i < (rightIndex/2) + 1; i++) {
 			
 			for(int j=leftIndex; j<rightIndex; j++) {
 				if(v[j] > v[j+1]) {
-					troca(v, j, j+1);
+					util.swap(v, j, j+1);
 				}
 			}
 			
 			for(int j=rightIndex; j>leftIndex; j--) {
 				if(v[j] < v[j-1]) {
-					troca(v, j, j-1);
+					util.swap(v, j, j-1);
 				}
 			}
 			
@@ -42,12 +44,4 @@ public class bidirecionalbubblesort {
 		rightIndex--;
 		
 	}
-	
-	private static void troca(int[] v, int i, int j) {
-			
-			int aux = v[i];
-			v[i] = v[j];
-			v[j] = aux;
-			
-		}
 }
