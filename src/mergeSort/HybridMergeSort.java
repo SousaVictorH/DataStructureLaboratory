@@ -1,32 +1,11 @@
 package mergeSort;
 
-import java.util.Arrays;
-
 public class HybridMergeSort {
 
 	public static final int sizeLimit = 4;
 	
-	protected static int MERGESORT_APPLICATIONS = 0;
-	protected static int INSERTIONSORT_APPLICATIONS = 0;
-	
-	public static void main(String[] args) {
-		
-		//int []v = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-		//int []v = {1, 2, 3, 4, 5, 6, 7 , 8, 9, 10};
-		
-		int []v = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 15, 16, 17, 18, 19, 14, 15 , 35, 38};
-		//int []v = {1, 2, 3, 4, 5, 6, 7 , 8, 9, 10, 11};
-
-		//int []v = {1, 5, 7, 9, 7, 5, 4, 2, 0};
-		//int []v = {1, 5, 7, 9, 7, 5, 4, 2, 0, -5};
-		
-		hybridMergeSort(v, 0, v.length-1);
-		
-		System.out.println(Arrays.toString(v));
-
-		System.out.println(INSERTIONSORT_APPLICATIONS);
-		System.out.println(MERGESORT_APPLICATIONS);
-	}
+	public static int MERGESORT_APPLICATIONS = 0;
+	public static int INSERTIONSORT_APPLICATIONS = 0;
 
 	public static void hybridMergeSort(int[] array, int leftIndex, int rightIndex) {
 		

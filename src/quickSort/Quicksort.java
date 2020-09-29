@@ -1,52 +1,34 @@
 package quickSort;
-import java.util.Arrays;
 
 import Utilidade.util;
 
 public class Quicksort {
 
-	public static void main(String[] args) {
+	public static void quickSort(int[] array, int leftIndex, int rightIndex) {
 		
-		int []v = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-		//int []v = {1, 2, 3, 4, 5, 6, 7 , 8, 9, 10};
-		
-		//int []v = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
-		//int []v = {1, 2, 3, 4, 5, 6, 7 , 8, 9, 10, 11};
-
-		//int []v = {1, 5, 7, 9, 7, 5, 4, 2, 0};
-		//int []v = {1, 5, 7, 9, 7, 5, 4, 2, 0, -5};
-		
-		quickSort(v, 0, v.length-1);
-		
-		System.out.println(Arrays.toString(v));
-		
-	}
-
-	public static void quickSort(int[] v, int esq, int dir) {
-		
-		if(esq < dir) {
-			int j = separar(v, esq, dir);
-			quickSort(v, esq, j-1);
-			quickSort(v, j+1, dir);
+		if(leftIndex < rightIndex) {
+			int j = partition(array, leftIndex, rightIndex);
+			quickSort(array, leftIndex, j-1);
+			quickSort(array, j+1, rightIndex);
 		}
 		
 	}
 
-	private static int separar(int[] v, int esq, int dir) {
+	private static int partition(int[] v, int leftIndex, int rightIndex) {
 		
-		int pivo = v[dir];
-		int i = esq;
+		int pivo = v[rightIndex];
+		int i = leftIndex;
 		
-		for(int j=esq; j<dir; j++) {
+		for(int j=leftIndex; j<rightIndex; j++) {
 			
-			if(v[i] <= pivo) {
+			if(v[j] <= pivo) {
 				util.swap(v, i, j);
 				i++;
 			}
 			
 		}
 		
-		util.swap(v, i, dir);
+		util.swap(v, i, rightIndex);
 		
 		return i;
 	}
