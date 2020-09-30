@@ -1,33 +1,40 @@
 package mergeSort;
 
-public class MergeSort {
+import sorting.AbstractSorting;
+	
+public class MergeSort<T extends Comparable<T>> extends AbstractSorting<T> {
 
-	public static void mergeSort(int[] array, int leftIndex, int rightIndex) {
-	    
-		if (rightIndex > leftIndex) {
-			
-		    int mid = (leftIndex+rightIndex)/2;
-		    
-		    mergeSort(array, leftIndex, mid);
-		    mergeSort(array, mid+1, rightIndex);
-		    
-		    merge(array, leftIndex, mid, rightIndex);
-		    
-		}
-	}
-
-	private static void merge(int[] array, int leftIndex, int meio, int rightIndex) {
+	@Override
+	public void sort(T[] array, int leftIndex, int rightIndex) {
 		
-	    int leftArray[] = new int[meio - leftIndex + 1];
-	    int rightArray[] = new int[rightIndex - meio];
+		if(leftIndex < 0 || rightIndex >= array.length) {
+			return;
+		}
+		
+		if (rightIndex > leftIndex) {
+				
+			   int mid = (leftIndex+rightIndex)/2;
+			    
+			   sort(array, leftIndex, mid);
+			   sort(array, mid+1, rightIndex);
+			    
+			   merge(array, leftIndex, mid, rightIndex);
+			    
+		}
+			
+	}
+	
+	private void merge(T[] array, int leftIndex, int mid, int rightIndex) {
+		
+	    T[] leftArray = (T[]) new Comparable[mid - leftIndex+1];
+	    T[] rightArray = (T[]) new Comparable[rightIndex - mid];
 
 	    for (int i = 0; i < leftArray.length; i++)
 	        leftArray[i] = array[leftIndex + i];
 	    for (int i = 0; i < rightArray.length; i++)
-	        rightArray[i] = array[meio + i + 1];
+	        rightArray[i] = array[mid + i + 1];
 
 	    int leftIterator = 0, rightIterator = 0;
-
 	    
 	    for (int i = leftIndex; i < rightIndex + 1; i++) {
 	    	
@@ -43,7 +50,7 @@ public class MergeSort {
 	            continue;
 	    	}
 	    	
-	        if (leftArray[leftIterator] < rightArray[rightIterator]) {
+	        if ((leftArray[leftIterator].compareTo(rightArray[rightIterator])) < 0) {
 	            array[i] = leftArray[leftIterator];
 	            leftIterator++;
 	         } else {
@@ -52,7 +59,7 @@ public class MergeSort {
 	         }
 	        
 	    }
-	    
+		
 	}
 	
 }
