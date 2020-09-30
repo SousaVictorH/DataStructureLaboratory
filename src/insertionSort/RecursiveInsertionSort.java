@@ -8,6 +8,7 @@ AbstractSorting<T> {
 	@Override
 	public void sort(T[] array, int leftIndex, int rightIndex) {
 		
+		
 		if(leftIndex == rightIndex || leftIndex > rightIndex) {
 			return;
 		}

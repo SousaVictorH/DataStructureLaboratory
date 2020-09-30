@@ -16,6 +16,14 @@ AbstractSorting<T> {
 	
 	public void sort(T[] array, int leftIndex, int rightIndex) {
 		
+		if(leftIndex == rightIndex || leftIndex > rightIndex) {
+			return;
+		}
+		
+		if(leftIndex < 0 || rightIndex >= array.length) {
+			return;
+		}
+		
 		if(rightIndex-leftIndex <= SIZE_LIMIT) {
 			insertionSort(array, leftIndex, rightIndex);
 			return;

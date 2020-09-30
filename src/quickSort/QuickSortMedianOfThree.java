@@ -7,6 +7,15 @@ public class QuickSortMedianOfThree<T extends Comparable<T>> extends
 AbstractSorting<T> {
 
 	public void sort(T[] array, int leftIndex, int rightIndex) {
+		
+		if(leftIndex == rightIndex || leftIndex > rightIndex) {
+			return;
+		}
+		
+		if(leftIndex < 0 || rightIndex >= array.length) {
+			return;
+		}
+		
     	if(rightIndex <= leftIndex) {
     		return;
     	}
