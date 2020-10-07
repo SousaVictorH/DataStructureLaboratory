@@ -29,6 +29,6 @@ AbstractSorting<T> {
 		
 		sort(array, leftIndex+1, rightIndex);
 		
-}
+	}
 
 }
