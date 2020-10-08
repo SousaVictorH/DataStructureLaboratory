@@ -13,7 +13,7 @@ public class ExtendedCountingSort extends AbstractSorting<Integer> {
 	@Override
 	public void sort(Integer[] array, int leftIndex, int rightIndex) {
 		
-		if(leftIndex >= rightIndex || rightIndex - leftIndex <= 1) {
+		if(leftIndex >= rightIndex || rightIndex - leftIndex < 1) {
 			return;
 		}
 		
@@ -21,7 +21,7 @@ public class ExtendedCountingSort extends AbstractSorting<Integer> {
 			return;
 		}
 		
-		// pega o max
+		// Pegando o elemento máximo do array
 		
 		Integer max = array[0];
 		Integer min = array[0];
@@ -35,8 +35,7 @@ public class ExtendedCountingSort extends AbstractSorting<Integer> {
 			}
 		}
 		
-		
-		// cria o array de contador do tamanho do max - min e inicializa com 0
+		// Criando o array de posições ,de tamanho max - min, e inicializando com 0
 		
 		Integer[] arrayCount = new Integer[(max - min)+1];
 		
@@ -45,14 +44,14 @@ public class ExtendedCountingSort extends AbstractSorting<Integer> {
 		}
 		
 		
-		// adiciona todos elementos em suas posições no array aux
+		// Adicionando 1 para cada i elemento na sua i - min posição no array de contadores
 		
 		for(int i=leftIndex; i<= rightIndex; i++) {
 			arrayCount[array[i] - min]++;
 		}
 		
 		
-		// troca no array principal
+		// Trocando no array principal
 		
 		Integer leftIterator = leftIndex;
 		
