@@ -1,4 +1,4 @@
-package coutingSort;
+package sortsPadroes;
 
 import sorting.AbstractSorting;
 

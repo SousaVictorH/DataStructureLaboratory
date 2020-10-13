@@ -1,4 +1,4 @@
-package quickSort;
+package dividireConquistar;
 
 import Utilidade.util;
 import sorting.AbstractSorting;

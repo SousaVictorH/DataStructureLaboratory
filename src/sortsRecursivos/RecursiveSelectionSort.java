@@ -1,4 +1,4 @@
-package selectionSort;
+package sortsRecursivos;
 
 import Utilidade.util;
 import sorting.AbstractSorting;

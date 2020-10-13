@@ -1,4 +1,4 @@
-package selectionSort;
+package sortsPadroes;
 
 import Utilidade.util;
 import sorting.AbstractSorting;

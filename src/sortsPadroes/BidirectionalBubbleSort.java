@@ -1,4 +1,4 @@
-package bubbleSort;
+package sortsPadroes;
 
 import Utilidade.util;
 import sorting.AbstractSorting;

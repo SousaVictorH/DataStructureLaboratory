@@ -1,4 +1,4 @@
-package insertionSort;
+package sortsPadroes;
 
 import sorting.AbstractSorting;
 

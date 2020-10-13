@@ -1,4 +1,4 @@
-package mergeSort;
+package dividireConquistar;
 
 import sorting.AbstractSorting;
 

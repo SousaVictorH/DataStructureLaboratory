@@ -1,4 +1,4 @@
-package insertionSort;
+package sortsRecursivos;
 
 import sorting.AbstractSorting;
 
