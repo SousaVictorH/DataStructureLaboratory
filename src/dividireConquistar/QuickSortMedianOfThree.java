@@ -28,6 +28,26 @@ AbstractSorting<T> {
     
     private int partition(T[] array, int leftIndex, int rightIndex) {
 		
+        int pivotIndex = getPivot(array, leftIndex, rightIndex);
+        
+        T pivo = array[pivotIndex];
+        int i = leftIndex;
+        
+        for(int j = leftIndex; j < rightIndex; j++){
+        	
+            if(array[j].compareTo(pivo) <= 0){
+            	util.swap(array, i, j);
+                i++;
+            }
+            
+        }
+        
+        util.swap(array, i , rightIndex);
+        return i;
+	}
+    
+    private int getPivot(T[] array, int leftIndex, int rightIndex) {
+    	
         int meio = (leftIndex + rightIndex)/2;
         
         if(array[leftIndex].compareTo(array[meio]) > 0) {
@@ -42,19 +62,6 @@ AbstractSorting<T> {
         
         util.swap(array, meio, rightIndex-1);
         
-        T pivo = array[rightIndex];
-        int i = leftIndex;
-        
-        for(int j = leftIndex; j < rightIndex; j++){
-        	
-            if(array[j].compareTo(pivo) <= 0){
-            	util.swap(array, i, j);
-                i++;
-            }
-            
-        }
-        
-        util.swap(array, i , rightIndex);
-        return i;
-	} 
+    	return rightIndex;
+    }
 }

@@ -1,5 +1,7 @@
 package estatisticaDeOrdem;
 
+import Utilidade.util;
+
 /**
  * O quickselect eh um algoritmo baseado no quicksort para
  * descobrir/selectionar, em tempo linear, a k-esima estatistica de ordem
@@ -40,7 +42,76 @@ public class QuickSelect<T extends Comparable<T>> {
 	 * @return
 	 */
 	public T quickSelect(T[] array, int k) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		
+		if( (array.length < 1) || (k<=0) || (k > array.length) ) {
+			return null;
+		}else {
+			return quickSelect(array, 0, array.length-1, k);	
+		}
+		
 	}
+
+	private T quickSelect(T[] array, int leftIndex, int rightIndex, int k){
+		
+		if(leftIndex <= rightIndex) {
+			
+			if(leftIndex == rightIndex) {
+				return array[leftIndex];
+			}
+			
+			int pivotIndex = partition(array, leftIndex, rightIndex);
+			
+			if(k < pivotIndex+1){
+				return quickSelect(array, leftIndex, pivotIndex-1, k);
+			}else if(k > pivotIndex+1 ) {
+				return quickSelect(array, pivotIndex+1, rightIndex, k);
+			} else{
+				return array[pivotIndex];
+			}
+		}
+		
+		return null;
+
+		
+	}
+	
+    private int partition(T[] array, int leftIndex, int rightIndex) {
+		
+        int pivotIndex = getPivot(array, leftIndex, rightIndex);
+        
+        T pivo = array[pivotIndex];
+        int i = leftIndex;
+        
+        for(int j = leftIndex; j < rightIndex; j++){
+        	
+            if(array[j].compareTo(pivo) <= 0){
+            	util.swap(array, i, j);
+                i++;
+            }
+            
+        }
+        
+        util.swap(array, i , rightIndex);
+        return i;
+	}
+    
+    private int getPivot(T[] array, int leftIndex, int rightIndex) {
+    	
+        int meio = (leftIndex + rightIndex)/2;
+        
+        if(array[leftIndex].compareTo(array[meio]) > 0) {
+        	util.swap(array, leftIndex, meio);
+        }      
+        if(array[rightIndex].compareTo(array[leftIndex]) < 0) {
+        	util.swap(array, rightIndex, leftIndex);
+        }     
+        if(array[rightIndex].compareTo(array[meio]) < 0) {
+        	util.swap(array, leftIndex, meio);
+        }
+        
+        util.swap(array, meio, rightIndex-1);
+        
+    	return rightIndex;
+    }
+    
 }

@@ -14,19 +14,10 @@ public class Main {
 		
 		KLargestOrderStatisticsImpl kLargest = new KLargestOrderStatisticsImpl();
 		
-		Integer[] lista = {14, 64, 75, 4, 23, 0, 12, 5, 9, 3};
+		Integer[] lista = {10, 9, 2, 8, 3, 7, 1,  4, 6, 5, 0};
 		
-		System.out.println(kLargest.orderStatistics(lista, 1));
-		System.out.println(kLargest.orderStatistics(lista, 2));
-		System.out.println(kLargest.orderStatistics(lista, 3));
-		System.out.println("");
-		System.out.println(kLargest.orderStatistics(lista, 4));
-		System.out.println(kLargest.orderStatistics(lista, 5));
-		System.out.println(kLargest.orderStatistics(lista, 6));
-		System.out.println("");
-		System.out.println(kLargest.orderStatistics(lista, 7));
-		System.out.println(kLargest.orderStatistics(lista, 8));
-		System.out.println(kLargest.orderStatistics(lista, 9));
+		System.out.println(Arrays.toString(kLargest.getKLargest(lista, 1)));
+		
 	}
 
 }
