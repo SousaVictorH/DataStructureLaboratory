@@ -1,9 +1,14 @@
 package buscaBinaria;
 
+import Utilidade.util;
+
 public class FloorBinarySearchImpl implements Floor {
 
 	@Override
 	public Integer floor(Integer[] array, Integer x) {
+		
+		// ORDENANDO
+		quickSort(array, 0, array.length-1);
 		
 		return floor(array, x, 0, array.length-1);
 		
@@ -13,12 +18,14 @@ public class FloorBinarySearchImpl implements Floor {
 		
 		Integer ret = null;
 		
+		// VERIFICANDO LIMITES
 		if(leftIndex > rightIndex) {
 			return ret;
 		}
 		
 		int mid = (leftIndex + rightIndex)/2;
 		
+		// PROCURANDO NA ESQUERDA CASO O ELEMENTO PROCURADO SEJA MENOR
 		if(array[mid] < x) {
 			
 			Integer aux = array[mid];
@@ -28,11 +35,11 @@ public class FloorBinarySearchImpl implements Floor {
 			if(ret == null) {
 				return aux;
 			}
-			
+		// PROCURANDO NA DIREITA CASO O ELEMENTO PROCURADO SEJA MAIOR
 		}else if(array[mid] > x) {
 			
 			ret = floor(array, x, leftIndex, mid-1);
-			
+		// RETORNANDO O ELEMENTO SE ELE FOR IGUAL
 		}else {
 			
 			ret =  x;
@@ -41,5 +48,64 @@ public class FloorBinarySearchImpl implements Floor {
 		
 		return ret;
 	}
+	
+	private void quickSort(Integer[] array, int leftIndex, int rightIndex) {
+		
+		if(leftIndex == rightIndex || leftIndex > rightIndex) {
+			return;
+		}
+		
+		if(leftIndex < 0 || rightIndex >= array.length) {
+			return;
+		}
+		
+    	if(rightIndex <= leftIndex) {
+    		return;
+    	}
+    	
+        int q = partition(array, leftIndex, rightIndex);
+        
+        quickSort(array, leftIndex, q - 1);
+        quickSort(array, q + 1, rightIndex);  
+	}   
+    
+    private int partition(Integer[] array, int leftIndex, int rightIndex) {
+		
+        int pivotIndex = getPivot(array, leftIndex, rightIndex);
+        
+        Integer pivo = array[pivotIndex];
+        int i = leftIndex;
+        
+        for(int j = leftIndex; j < rightIndex; j++){
+        	
+            if(array[j].compareTo(pivo) <= 0){
+            	util.swap(array, i, j);
+                i++;
+            }
+            
+        }
+        
+        util.swap(array, i , rightIndex);
+        return i;
+	}
+    
+    private int getPivot(Integer[] array, int leftIndex, int rightIndex) {
+    	
+        int meio = (leftIndex + rightIndex)/2;
+        
+        if(array[leftIndex].compareTo(array[meio]) > 0) {
+        	util.swap(array, leftIndex, meio);
+        }      
+        if(array[rightIndex].compareTo(array[leftIndex]) < 0) {
+        	util.swap(array, rightIndex, leftIndex);
+        }     
+        if(array[rightIndex].compareTo(array[meio]) < 0) {
+        	util.swap(array, leftIndex, meio);
+        }
+        
+        util.swap(array, meio, rightIndex-1);
+        
+    	return rightIndex;
+    }
 
 }
