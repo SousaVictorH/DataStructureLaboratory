@@ -1,4 +1,4 @@
-package estatisticaDeOrdem;
+package kLargest;
 
 /**
  * Returns the K largest elements of the input array
