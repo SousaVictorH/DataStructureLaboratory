@@ -37,6 +37,7 @@ public class CircularQueue<T> implements Queue<T> {
 
 	@Override
 	public T dequeue() throws QueueUnderflowException {
+		
 		if (this.isEmpty()){
 			throw new QueueUnderflowException();
 		}
@@ -45,10 +46,12 @@ public class CircularQueue<T> implements Queue<T> {
 		this.head = (this.head + 1) % this.array.length;
 		this.elements--;
 		return element;
+		
 	}
 
 	@Override
 	public T head() {
+		
 		T head = null;
 
 		if (!this.isEmpty()){
@@ -56,16 +59,21 @@ public class CircularQueue<T> implements Queue<T> {
 		}
 
 		return head;
+		
 	}
 
 	@Override
 	public boolean isEmpty() {
+		
 		return (this.elements == 0);
+		
 	}
 
 	@Override
 	public boolean isFull() {
+		
 		return (this.elements == this.array.length);
+		
 	}
 
 }

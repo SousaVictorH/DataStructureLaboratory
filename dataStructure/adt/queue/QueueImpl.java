@@ -24,12 +24,16 @@ public class QueueImpl<T> implements Queue<T> {
 
 	@Override
 	public boolean isEmpty() {
+		
 		return (this.tail == -1);
+		
 	}
 
 	@Override
 	public boolean isFull() {
+		
 		return this.tail == (this.array.length - 1);
+		
 	}
 
 	private void shiftLeft() {
