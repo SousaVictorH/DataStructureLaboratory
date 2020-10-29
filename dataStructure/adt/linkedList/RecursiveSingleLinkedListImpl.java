@@ -1,49 +1,87 @@
 package adt.linkedList;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 
 	protected T data;
 	protected RecursiveSingleLinkedListImpl<T> next;
 
 	public RecursiveSingleLinkedListImpl() {
-
 	}
 
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		return (this.getData() == null);
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int size = 0;
+		if(!this.isEmpty()){
+			size = 1 + this.getNext().size();
+		}
+		return size;
 	}
 
 	@Override
 	public T search(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		T wanted = null;
+		if(!this.isEmpty()){
+			if(this.getData().equals(element)){
+				wanted = this.getData();
+			} else {
+				return this.getNext().search(element);
+			}
+		}
+		return wanted;
 	}
 
 	@Override
 	public void insert(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(this.isEmpty()){
+			this.setData(element);
+			this.setNext(new RecursiveSingleLinkedListImpl<>());
+		} else {
+			this.getNext().insert(element);
+		}
 	}
 
 	@Override
 	public void remove(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+
+		if(element!=null && !this.isEmpty()){
+			if(this.getData().equals(element)){
+				if(this.getNext().isEmpty()){
+					this.setData(null);
+					this.setNext(this.getNext().getNext());
+				} else{
+					this.setData(this.getNext().getData());
+					this.setNext(this.getNext().getNext());
+				}
+			} else {
+				this.getNext().remove(element);
+			}
+		}
 	}
 
 	@Override
 	public T[] toArray() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+ 		List<T> array = new ArrayList<>();
+		auxToArray(array);
+
+		return (T[]) array.toArray();
+	}
+
+	private void auxToArray(List<T> array){
+		
+		if(!this.isEmpty()){
+			array.add(this.getData());
+			this.getNext().auxToArray(array);
+		}
 	}
 
 	public T getData() {

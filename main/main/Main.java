@@ -7,6 +7,7 @@ import sortsPadroes.*;
 import sortsRecursivos.*;
 import buscaBinaria.*;
 import estatisticaDeOrdem.*;
+import adt.linkedList.*;
 import adt.queue.*;
 import adt.stack.*;
 
@@ -14,14 +15,12 @@ public class Main {
 
 	public static void main(String[] args) throws StackOverflowException, StackUnderflowException, QueueUnderflowException, QueueOverflowException {
 		
-		QueueUsingStack q1 = new QueueUsingStack(1);
+		//RecursiveSingleLinkedListImpl l1 = new RecursiveSingleLinkedListImpl();
+		RecursiveDoubleLinkedListImpl l1 = new RecursiveDoubleLinkedListImpl();
 		
-		System.out.println(q1.isEmpty());
-		
-		q1.enqueue(5);
-		
-		System.out.println(q1.isFull());
-
+		l1.insert(5);
+		l1.remove(5);
+		System.out.println(Arrays.toString(l1.toArray()));
 	}
 
 }
