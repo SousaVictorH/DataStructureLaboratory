@@ -1,8 +1,5 @@
 package adt.linkedList;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class RecursiveDoubleLinkedListImpl<T> extends
 		RecursiveSingleLinkedListImpl<T> implements DoubleLinkedList<T> {
 

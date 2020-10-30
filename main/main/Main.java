@@ -18,9 +18,7 @@ public class Main {
 		//RecursiveSingleLinkedListImpl l1 = new RecursiveSingleLinkedListImpl();
 		RecursiveDoubleLinkedListImpl l1 = new RecursiveDoubleLinkedListImpl();
 		
-		l1.insert(5);
-		l1.remove(5);
-		System.out.println(Arrays.toString(l1.toArray()));
+		System.out.println(l1.size());
 	}
 
 }
