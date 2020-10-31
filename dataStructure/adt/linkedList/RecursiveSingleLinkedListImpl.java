@@ -3,16 +3,15 @@ package adt.linkedList;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 
 	protected T data;
 	protected RecursiveSingleLinkedListImpl<T> next;
 
 	public RecursiveSingleLinkedListImpl() {
+		
 	}
-
-
+	
 	@Override
 	public boolean isEmpty() {
 		return (this.getData() == null);
