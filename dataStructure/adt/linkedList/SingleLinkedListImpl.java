@@ -33,24 +33,24 @@ public class SingleLinkedListImpl<T> implements LinkedList<T> {
 
 	@Override
 	public T search(T element) {
-		T wanted = null;
+		T toReturn = null;
 
 		if(isEmpty() || element == null) {
-			return wanted;	
+			return toReturn;	
 		}
 
 		SingleLinkedListNode<T> currentNode = this.head;
 
 		while(currentNode != null){
 			if(element.equals(currentNode.getData())){
-				wanted = currentNode.getData();
+				toReturn = currentNode.getData();
 				break;
 			}else{
 				currentNode = currentNode.getNext();
 			}
 		}
 		
-		return wanted;
+		return toReturn;
 	}
 
 	@Override
@@ -102,20 +102,21 @@ public class SingleLinkedListImpl<T> implements LinkedList<T> {
 
 	@Override
 	public T[] toArray() {
-		T[] lista = (T[]) new Comparable[this.size()];
+		T[] array = (T[]) new Comparable[this.size()];
 		
 		if(isEmpty()) {
-			return lista;
+			return array;
 		}
 
-		SingleLinkedListNode<T> newElement = this.head;
+		SingleLinkedListNode<T> temp = this.head;
 		int i = 0;
-		while(!newElement.isNIL()){
-			lista[i++] = newElement.getData();
-			newElement = newElement.getNext();
+		
+		while(!temp.isNIL()){
+			array[i++] = temp.getData();
+			temp = temp.getNext();
 		}
 
-		return lista;
+		return array;
 	}
 
 	public SingleLinkedListNode<T> getHead() {

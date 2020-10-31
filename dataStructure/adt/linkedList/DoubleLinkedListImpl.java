@@ -67,6 +67,7 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements
 				
 				if(currentNode.getData().equals(element)) {
 					if(currentNode.getNext().isNIL()) {
+						// Último elemento
 						this.removeLast();
 					} else {
 						currentNode.getPrevious().setNext(currentNode.getNext());

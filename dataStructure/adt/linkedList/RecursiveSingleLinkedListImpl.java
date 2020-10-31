@@ -31,25 +31,26 @@ public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 
 	@Override
 	public T search(T element) {
-		T wanted = null;
+		T toReturn = null;
 		
 		if(this.isEmpty()) {
-			return wanted;
+			return toReturn;
 		}
 		
 		if(this.getData().equals(element)){
-			wanted = this.getData();
+			toReturn = this.getData();
 		} else {
-			wanted = this.getNext().search(element);
+			toReturn = this.getNext().search(element);
 		}
 		
-		return wanted;
+		return toReturn;
 	}
 
 	@Override
 	public void insert(T element) {
 		
 		if(this.isEmpty()){
+			// Último elemento
 			this.setData(element);
 			this.setNext(new RecursiveSingleLinkedListImpl<>());
 		} else {
@@ -67,6 +68,7 @@ public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 
 		if(this.getData().equals(element)){
 			if(this.getNext().isEmpty()){
+				// Próximo é vazio
 				this.setData(null);
 				this.setNext(this.getNext().getNext());
 			} else{
@@ -82,16 +84,16 @@ public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 	public T[] toArray() {
  		List<T> array = new ArrayList<>();
 		auxToArray(array);
-
 		return (T[]) array.toArray();
 	}
 
 	private void auxToArray(List<T> array){
-		
-		if(!this.isEmpty()){
-			array.add(this.getData());
-			this.getNext().auxToArray(array);
+		if(this.isEmpty()) {
+			return;
 		}
+		
+		array.add(this.getData());
+		this.getNext().auxToArray(array);
 		
 	}
 
