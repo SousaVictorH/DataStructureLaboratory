@@ -19,6 +19,33 @@ public class Main {
 		RecursiveDoubleLinkedListImpl l1 = new RecursiveDoubleLinkedListImpl();
 		
 		System.out.println(l1.size());
+		
+		l1.removeFirst();
+		l1.removeLast();
+		l1.remove(1);
+		
+		System.out.println(l1.isEmpty());
+		
+		l1.insert(5);
+		l1.insert(6);
+		l1.insert(7);
+		l1.insert(8);
+		l1.insert(9);
+		l1.insert(10);
+		
+		System.out.println(l1.isEmpty());
+		
+		System.out.println(Arrays.toString(l1.toArray()));
+		
+		l1.removeLast();
+		l1.removeLast();
+		l1.removeLast();
+		l1.removeLast();
+		l1.removeLast();
+		l1.removeLast();
+		l1.removeLast();
+		
+		System.out.println(Arrays.toString(l1.toArray()));
 	}
 
 }
