@@ -24,18 +24,18 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 		}
 
 		int probe = 0;
-		int hashElement = ((HashFunctionLinearProbing)this.hashFunction).hash(element,probe);
+		int temp = ((HashFunctionLinearProbing)this.hashFunction).hash(element,probe);
 		
-		while(this.table[hashElement] != null){
+		while(this.table[temp] != null){
 			
-			if(this.table[hashElement].equals(deletedElement)) {
+			if(this.table[temp].equals(deletedElement)) {
 				break;
 			}
 			
-			hashElement = ((HashFunctionLinearProbing)this.hashFunction).hash(element,++probe);
+			temp = ((HashFunctionLinearProbing)this.hashFunction).hash(element,++probe);
 			COLLISIONS++;
 		}
-		this.table[hashElement] = element;
+		this.table[temp] = element;
 		elements++;
 	}
 
@@ -46,18 +46,18 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 		}
 		
 		int probe = 0;
-		int hashElement = ((HashFunctionLinearProbing)this.hashFunction).hash(element,probe);
+		int temp = ((HashFunctionLinearProbing)this.hashFunction).hash(element,probe);
 		
-		while (probe < table.length && this.table[hashElement] != null) {
+		while (probe < table.length && this.table[temp] != null) {
 			
-			if(this.table[hashElement].equals(element)) {
-				this.table[hashElement] = deletedElement;
+			if(this.table[temp].equals(element)) {
+				this.table[temp] = deletedElement;
 				COLLISIONS-=probe;
 				elements--;
 				break;
 			}
 			
-			hashElement = ((HashFunctionLinearProbing<T>) this.hashFunction).hash(element, ++probe);
+			temp = ((HashFunctionLinearProbing<T>) this.hashFunction).hash(element, ++probe);
 		}
 	}
 
@@ -87,16 +87,16 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 		}
 		
 		int probe = 0;
-		int hashElement = ((HashFunctionLinearProbing<T>) this.hashFunction).hash(element, probe);
+		int temp = ((HashFunctionLinearProbing<T>) this.hashFunction).hash(element, probe);
 
-		while (probe < table.length && this.table[hashElement] != null) {
+		while (probe < table.length && this.table[temp] != null) {
 			
-			if(this.table[hashElement].equals(element)) {
-				index = hashElement;
+			if(this.table[temp].equals(element)) {
+				index = temp;
 				break;
 			}
 			
-			hashElement = ((HashFunctionLinearProbing<T>) this.hashFunction).hash(element, ++probe);
+			temp = ((HashFunctionLinearProbing<T>) this.hashFunction).hash(element, ++probe);
 			
 		}
 		

@@ -69,17 +69,17 @@ public class HashtableClosedAddressImpl<T> extends
 			return;
 		}
 		
-		int hashElement = ((HashFunctionClosedAddress<T>) this.hashFunction).hash(element);
+		int hashResult = ((HashFunctionClosedAddress<T>) this.hashFunction).hash(element);
 		
 		if (this.search(element) == null) {
 			
-			if (this.table[hashElement] == null){
-				this.table[hashElement] = new LinkedList<>();
+			if (this.table[hashResult] == null){
+				this.table[hashResult] = new LinkedList<>();
 			} else {
 				this.COLLISIONS++;
 			}
 			
-			((LinkedList<T>) this.table[hashElement]).addFirst(element);
+			((LinkedList<T>) this.table[hashResult]).addFirst(element);
 			this.elements++;
 		}
 	}
@@ -91,14 +91,14 @@ public class HashtableClosedAddressImpl<T> extends
 			return;
 		}
 		
-		int hashElement = ((HashFunctionClosedAddress<T>) this.hashFunction).hash(element);
+		int hashResult = ((HashFunctionClosedAddress<T>) this.hashFunction).hash(element);
 		
-		if (((LinkedList<T>) this.table[hashElement]).size() > 1) {
-			((LinkedList<T>) this.table[hashElement]).remove(element);
+		if (((LinkedList<T>) this.table[hashResult]).size() > 1) {
+			((LinkedList<T>) this.table[hashResult]).remove(element);
 			this.COLLISIONS--;
 			this.elements--;
 		} else {
-			this.table[hashElement] = null;
+			this.table[hashResult] = null;
 			this.elements--;
 		}
 		
@@ -113,13 +113,13 @@ public class HashtableClosedAddressImpl<T> extends
 			return toReturn;
 		}
 		
-		int hashElement = ((HashFunctionClosedAddress<T>) this.hashFunction).hash(element);
+		int hashResult = ((HashFunctionClosedAddress<T>) this.hashFunction).hash(element);
 		
-		if (this.table[hashElement] != null && ((LinkedList<T>) this.table[hashElement]).contains(element)) {
+		if (this.table[hashResult] != null && ((LinkedList<T>) this.table[hashResult]).contains(element)) {
 			
-			for(int i=0; i<((LinkedList<T>) this.table[hashElement]).size(); i++) {
+			for(int i=0; i<((LinkedList<T>) this.table[hashResult]).size(); i++) {
 				
-				T temp = ((LinkedList<T>) this.table[hashElement]).get(i);
+				T temp = ((LinkedList<T>) this.table[hashResult]).get(i);
 				
 				if(element.equals(temp)) {
 					toReturn = temp;

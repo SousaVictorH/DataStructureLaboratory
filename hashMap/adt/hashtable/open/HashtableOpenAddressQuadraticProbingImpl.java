@@ -15,25 +15,93 @@ public class HashtableOpenAddressQuadraticProbingImpl<T extends Storable>
 
 	@Override
 	public void insert(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(this.isFull()) {
+			throw new HashtableOverflowException();
+		}
+		
+		if(element == null || this.search(element) != null) {
+			return;
+		}
+
+		int probe = 0;
+		int temp = ((HashFunctionQuadraticProbing<T>)this.hashFunction).hash(element,probe);
+		
+		while(this.table[temp] != null){
+			
+			if(this.table[temp].equals(deletedElement)) {
+				break;
+			}
+			
+			temp = ((HashFunctionQuadraticProbing<T>)this.hashFunction).hash(element,++probe);
+			COLLISIONS++;
+
+		}
+		
+		this.table[temp] = element;
+		elements++;
 	}
 
 	@Override
 	public void remove(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(element == null || this.isEmpty() || this.search(element) == null) {
+			return;
+		}
+		
+		int probe = 0;
+		int temp = ((HashFunctionQuadraticProbing<T>)this.hashFunction).hash(element,probe);
+		
+		while (this.table[temp] != null && probe < table.length) {
+			
+			if(this.table[temp].equals(element)) {
+				this.table[temp] = deletedElement;
+				COLLISIONS-=probe;
+				elements--;
+				break;
+			}
+			
+			temp = ((HashFunctionQuadraticProbing<T>) this.hashFunction).hash(element, ++probe);
+		}
+		
 	}
 
 	@Override
 	public T search(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		
+		T toReturn = null;
+		
+		if(element == null || this.isEmpty()) {
+			return toReturn;
+		}
+		
+		int index = indexOf(element);
+		if (index != -1) {
+			toReturn = (T) this.table[index];
+		}
+		
+		return toReturn;
 	}
 
 	@Override
 	public int indexOf(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int index = -1;
+		
+		if(element == null || this.isEmpty()) {
+			return index;
+		}
+		
+		int probe = 0;
+		int temp = ((HashFunctionQuadraticProbing<T>) this.hashFunction).hash(element, probe);
+
+		while (this.table[temp] != null && probe < table.length) {
+			
+			if(this.table[temp].equals(element)) {
+				index = temp;
+				break;
+			}
+			
+			temp = ((HashFunctionQuadraticProbing<T>) this.hashFunction).hash(element, ++probe);
+		}
+		
+		return index;
 	}
 }
