@@ -52,7 +52,6 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 			
 			if(this.table[temp].equals(element)) {
 				this.table[temp] = deletedElement;
-				COLLISIONS-=probe;
 				elements--;
 				break;
 			}

@@ -54,7 +54,6 @@ public class HashtableOpenAddressQuadraticProbingImpl<T extends Storable>
 			
 			if(this.table[temp].equals(element)) {
 				this.table[temp] = deletedElement;
-				COLLISIONS-=probe;
 				elements--;
 				break;
 			}

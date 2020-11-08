@@ -1,8 +1,12 @@
 package adt.hashtable.closed;
 
-import adt.hashtable.hashfunction.*;
-import util.Util;
 import java.util.LinkedList;
+
+import adt.hashtable.hashfunction.HashFunction;
+import adt.hashtable.hashfunction.HashFunctionClosedAddress;
+import adt.hashtable.hashfunction.HashFunctionClosedAddressMethod;
+import adt.hashtable.hashfunction.HashFunctionFactory;
+import util.Util;
 
 public class HashtableClosedAddressImpl<T> extends
 		AbstractHashtableClosedAddress<T> {
@@ -93,7 +97,6 @@ public class HashtableClosedAddressImpl<T> extends
 		
 		if (((LinkedList<T>) this.table[hashResult]).size() > 1) {
 			((LinkedList<T>) this.table[hashResult]).remove(element);
-			this.COLLISIONS--;
 			this.elements--;
 		} else {
 			this.table[hashResult] = null;
@@ -130,12 +133,12 @@ public class HashtableClosedAddressImpl<T> extends
 	}
 
 	@Override
-	public int indexOf(T element) {	
+	public int indexOf(T element) {
 		if(element == null || this.isEmpty() || this.search(element) == null) {
 			return -1;
 		}else {
 			return ((HashFunctionClosedAddress<T>) this.hashFunction).hash(element);
-		}	
+		}
 	}
 
 }
