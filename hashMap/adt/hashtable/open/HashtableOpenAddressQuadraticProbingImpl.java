@@ -61,12 +61,10 @@ public class HashtableOpenAddressQuadraticProbingImpl<T extends Storable>
 			
 			temp = ((HashFunctionQuadraticProbing<T>) this.hashFunction).hash(element, ++probe);
 		}
-		
 	}
 
 	@Override
 	public T search(T element) {
-		
 		T toReturn = null;
 		
 		if(element == null || this.isEmpty()) {

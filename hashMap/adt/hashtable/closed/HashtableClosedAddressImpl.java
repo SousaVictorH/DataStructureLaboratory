@@ -53,7 +53,6 @@ public class HashtableClosedAddressImpl<T> extends
 	 * prime.
 	 */
 	int getPrimeAbove(int number) {
-		
 		number++;
 		
 		while (!Util.isPrime(number)) {
@@ -86,7 +85,6 @@ public class HashtableClosedAddressImpl<T> extends
 
 	@Override
 	public void remove(T element) {
-		
 		if(element == null || this.isEmpty() || this.search(element) == null) {
 			return;
 		}
@@ -101,12 +99,10 @@ public class HashtableClosedAddressImpl<T> extends
 			this.table[hashResult] = null;
 			this.elements--;
 		}
-		
 	}
 
 	@Override
 	public T search(T element) {
-		
 		T toReturn = null;
 		
 		if(element == null || this.isEmpty()) {
@@ -134,14 +130,12 @@ public class HashtableClosedAddressImpl<T> extends
 	}
 
 	@Override
-	public int indexOf(T element) {
-		
+	public int indexOf(T element) {	
 		if(element == null || this.isEmpty() || this.search(element) == null) {
 			return -1;
 		}else {
 			return ((HashFunctionClosedAddress<T>) this.hashFunction).hash(element);
-		}
-		
+		}	
 	}
 
 }
