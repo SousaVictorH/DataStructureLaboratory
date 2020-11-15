@@ -57,22 +57,30 @@ public class SimpleBSTManipulationImpl<T extends Comparable<T>> implements Simpl
 
 	private boolean isSimilar(BTNode<T> node1, BTNode<T> node2) {
 		
-		boolean isSimilar = false;
-		isSimilar = node1.isLeaf() && node2.isLeaf();
+		boolean isSimilar = node1.isLeaf() && node2.isLeaf();
 
 		if (!isSimilar) {
-			boolean isSimilarLeft = false;
-			boolean isSimilarRight = false;
-			if ((!node1.getLeft().isEmpty() && !node2.getLeft().isEmpty()))
-				isSimilarLeft = isSimilar((BSTNode<T>) node1.getLeft(), (BSTNode<T>) node2.getLeft());
-			else if (node1.getLeft().isEmpty() && node2.getLeft().isEmpty()) isSimilarLeft = true;
+			
+			if ((!node1.getLeft().isEmpty() && !node2.getLeft().isEmpty())) {
+				isSimilar = isSimilar((BSTNode<T>) node1.getLeft(), (BSTNode<T>) node2.getLeft());
+			}
+				
+			else if (node1.getLeft().isEmpty() && node2.getLeft().isEmpty()) {
+				isSimilar = true;
+			}
+			
+			if(!isSimilar) {
+				return false;
+			}
 
-			if (!node1.getRight().isEmpty() && !node2.getRight().isEmpty())
-				isSimilarRight = isSimilar((BSTNode<T>) node1.getRight(), (BSTNode<T>) node2.getRight());
-			else if (node1.getRight().isEmpty() && node2.getRight().isEmpty()) isSimilarRight = true;
-
-			isSimilar = isSimilarLeft && isSimilarRight;
+			if (!node1.getRight().isEmpty() && !node2.getRight().isEmpty()) {
+				isSimilar = isSimilar((BSTNode<T>) node1.getRight(), (BSTNode<T>) node2.getRight());
+			}else if (node1.getRight().isEmpty() && node2.getRight().isEmpty()) {
+				isSimilar = true;
+			}
+			
 		}
+		
 		return isSimilar;
 		
 	}
