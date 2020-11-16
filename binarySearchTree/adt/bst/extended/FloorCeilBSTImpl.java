@@ -11,8 +11,7 @@ import adt.bst.BSTNode;
 public class FloorCeilBSTImpl extends BSTImpl<Integer> implements FloorCeilBST {
 
 	@Override
-	public Integer floor(Integer[] array, double numero) {
-		
+	public Integer floor(Integer[] array, double numero) {		
 		BSTImpl<Integer> tree = new BSTImpl<Integer>();
 		this.fillTree(array, 0, tree);
 		
@@ -29,9 +28,8 @@ public class FloorCeilBSTImpl extends BSTImpl<Integer> implements FloorCeilBST {
 		tree.insert(array[index]);
 		this.fillTree(array, index +1, tree);
 	}
-
-	private Integer floor(BSTNode<Integer> node, double numero){
-		
+	
+	private Integer floor(BSTNode<Integer> node, double numero){		
 		Integer floor = null;
 		
 		if(node.isEmpty()){
@@ -64,10 +62,8 @@ public class FloorCeilBSTImpl extends BSTImpl<Integer> implements FloorCeilBST {
 		return floor;
 	}
 
-
 	@Override
-	public Integer ceil(Integer[] array, double numero) {
-		
+	public Integer ceil(Integer[] array, double numero) {		
 		BSTImpl<Integer> tree = new BSTImpl<Integer>();
 		this.fillTree(array, 0, tree);
 		
@@ -75,9 +71,8 @@ public class FloorCeilBSTImpl extends BSTImpl<Integer> implements FloorCeilBST {
 
 		return this.ceil(tree.getRoot(), numero);
 	}
-
-	private Integer ceil(BSTNode<Integer> node, double numero){
-		
+	
+	private Integer ceil(BSTNode<Integer> node, double numero){	
 		Integer ceil = null;
 		
 		if(node.isEmpty()){

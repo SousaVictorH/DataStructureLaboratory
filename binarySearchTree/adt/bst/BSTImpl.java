@@ -22,10 +22,8 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 	}
 
 	@Override
-	public int height() {
-		
+	public int height() {	
 		return this.height(this.root);
-		
 	}
 
 	private int height (BTNode<T> node) {
@@ -87,7 +85,7 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 			
 			if (node.getData().compareTo(element) < 0) {
 				insert((BSTNode<T>) node.getRight(), element);
-			} else {
+			} else if(node.getData().compareTo(element) > 0){
 				insert((BSTNode<T>) node.getLeft(), element);
 			}
 			

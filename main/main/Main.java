@@ -19,21 +19,14 @@ public class Main {
 		
 		//RecursiveSingleLinkedListImpl l1 = new RecursiveSingleLinkedListImpl();
 		FloorCeilBSTImpl arvore = new FloorCeilBSTImpl();
-		FloorCeilBSTImpl arvore2 = new FloorCeilBSTImpl();
 		
-		SimpleBSTManipulationImpl comparator = new SimpleBSTManipulationImpl();
+		arvore.insert(10);
 		
-	 	System.out.println(comparator.equals(arvore, arvore2));
-	 	System.out.println(comparator.isSimilar(arvore, arvore2));
-	 	
-	 	arvore.insert(10);	 	
-	 	arvore2.insert(7);
-	 	
-//	 	arvore.insert(5);
-//	 	arvore2.insert(6);
-	 	
-	 	System.out.println(comparator.equals(arvore, arvore2));
-	 	System.out.println(comparator.isSimilar(arvore, arvore2));
+		System.out.println(Arrays.toString(arvore.order()));
+		
+		arvore.insert(10);
+		
+		System.out.println(Arrays.toString(arvore.order()));
 	}
 
 }
