@@ -1,6 +1,6 @@
 package sortsPadroes;
 
-import Utilidade.util;
+import util.Util;
 import sorting.AbstractSorting;
 
 public class SelectionSort<T extends Comparable<T>> extends AbstractSorting<T> {
@@ -29,7 +29,7 @@ public class SelectionSort<T extends Comparable<T>> extends AbstractSorting<T> {
 			}
 			
 			if(array[j].compareTo(array[posMin]) > 0) {
-				util.swap(array, j, posMin);
+				Util.swap(array, j, posMin);
 			}
 			
 		}

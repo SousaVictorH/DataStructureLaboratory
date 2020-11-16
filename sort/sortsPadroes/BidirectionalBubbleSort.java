@@ -1,6 +1,6 @@
 package sortsPadroes;
 
-import Utilidade.util;
+import util.Util;
 import sorting.AbstractSorting;
 
 public class BidirectionalBubbleSort<T extends Comparable<T>> extends
@@ -21,13 +21,13 @@ AbstractSorting<T> {
 			
 			for(int j=leftIndex; j<rightIndex; j++) {
 				if(array[j].compareTo(array[j+1]) > 0) {
-					util.swap(array, j, j+1);
+					Util.swap(array, j, j+1);
 				}
 			}
 			
 			for(int j=rightIndex; j>leftIndex; j--) {
 				if(array[j].compareTo(array[j-1]) < 0) {
-					util.swap(array, j, j-1);
+					Util.swap(array, j, j-1);
 				}
 			}
 			

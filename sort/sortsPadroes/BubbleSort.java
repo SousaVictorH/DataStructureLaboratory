@@ -1,6 +1,6 @@
 package sortsPadroes;
 
-import Utilidade.util;
+import util.Util;
 import sorting.AbstractSorting;
 
 public class BubbleSort<T extends Comparable<T>> extends AbstractSorting<T> {
@@ -22,7 +22,7 @@ public class BubbleSort<T extends Comparable<T>> extends AbstractSorting<T> {
 				
 				if(array[j].compareTo(array[j-1]) < 0) {
 					
-					util.swap(array, j, j-1);
+					Util.swap(array, j, j-1);
 					
 				}
 				

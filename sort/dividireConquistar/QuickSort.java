@@ -1,6 +1,6 @@
 package dividireConquistar;
 
-import Utilidade.util;
+import util.Util;
 
 import sorting.AbstractSorting;
 
@@ -32,13 +32,13 @@ public class QuickSort<T extends Comparable<T>> extends AbstractSorting<T> {
 		for(int j=leftIndex; j<rightIndex; j++) {
 			
 			if(array[j].compareTo(pivo) <= 0) {
-				util.swap(array, i, j);
+				Util.swap(array, i, j);
 				i++;
 			}
 			
 		}
 		
-		util.swap(array, i, rightIndex);
+		Util.swap(array, i, rightIndex);
 		
 		return i;
 	}

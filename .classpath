@@ -9,9 +9,10 @@
 	<classpathentry kind="src" path="orderStatistics"/>
 	<classpathentry kind="src" path="binarySearch"/>
 	<classpathentry kind="src" path="dataStructure"/>
-	<classpathentry kind="src" path="main"/>
+	<classpathentry kind="src" path="utilidade"/>
 	<classpathentry kind="src" path="hashMap"/>
 	<classpathentry kind="src" path="binarySearchTree"/>
+	<classpathentry kind="src" path="heapBinaria"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

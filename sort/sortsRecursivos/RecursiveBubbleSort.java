@@ -1,6 +1,6 @@
 package sortsRecursivos;
 
-import Utilidade.util;
+import util.Util;
 import sorting.AbstractSorting;
 
 public class RecursiveBubbleSort<T extends Comparable<T>> extends
@@ -19,7 +19,7 @@ AbstractSorting<T> {
 		
 		for(int i=0; i<rightIndex; i++) {
 			if(array[i].compareTo(array[i+1]) > 0) {
-				util.swap(array, i, i+1);
+				Util.swap(array, i, i+1);
 			}
 		}
 		

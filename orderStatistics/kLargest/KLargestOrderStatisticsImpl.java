@@ -1,6 +1,6 @@
 package kLargest;
 
-import Utilidade.util;
+import util.Util;
 
 /**
  * Uma implementacao da interface KLargest que usa estatisticas de ordem para 
@@ -98,13 +98,13 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
         for(int j = leftIndex; j < rightIndex; j++){
         	
             if(array[j].compareTo(pivo) <= 0){
-            	util.swap(array, i, j);
+            	Util.swap(array, i, j);
                 i++;
             }
             
         }
         
-        util.swap(array, i , rightIndex);
+        Util.swap(array, i , rightIndex);
         return i;
 	}
     
@@ -113,16 +113,16 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
         int meio = (leftIndex + rightIndex)/2;
         
         if(array[leftIndex].compareTo(array[meio]) > 0) {
-        	util.swap(array, leftIndex, meio);
+        	Util.swap(array, leftIndex, meio);
         }      
         if(array[rightIndex].compareTo(array[leftIndex]) < 0) {
-        	util.swap(array, rightIndex, leftIndex);
+        	Util.swap(array, rightIndex, leftIndex);
         }     
         if(array[rightIndex].compareTo(array[meio]) < 0) {
-        	util.swap(array, leftIndex, meio);
+        	Util.swap(array, leftIndex, meio);
         }
         
-        util.swap(array, meio, rightIndex-1);
+        Util.swap(array, meio, rightIndex-1);
         
     	return rightIndex;
     }

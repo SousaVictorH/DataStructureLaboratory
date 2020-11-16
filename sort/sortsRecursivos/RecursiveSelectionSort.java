@@ -1,6 +1,6 @@
 package sortsRecursivos;
 
-import Utilidade.util;
+import util.Util;
 import sorting.AbstractSorting;
 
 public class RecursiveSelectionSort<T extends Comparable<T>> extends
@@ -36,7 +36,7 @@ AbstractSorting<T> {
 		}
 		
 		if(array[leftIndex].compareTo(array[posMin]) > 0) {
-			util.swap(array, leftIndex, posMin);
+			Util.swap(array, leftIndex, posMin);
 		}
 		
 		sort(array, leftIndex+1, rightIndex);
