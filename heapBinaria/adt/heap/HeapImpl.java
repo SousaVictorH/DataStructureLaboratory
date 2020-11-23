@@ -8,9 +8,9 @@ import util.Util;
 
 /**
  * O comportamento de qualquer heap é definido pelo heapify. Neste caso o
- * heapify dessa heap deve comparar os elementos e colocar o maior sempre no
- * topo. Ou seja, admitindo um comparador normal (responde corretamente 3 > 2),
- * essa heap deixa os elementos maiores no topo. Essa comparação não é feita 
+ * heapify dessa heap deve comparar os elementos e colocar o menor sempre no
+ * topo. Ou seja, admitindo um comparador normal (responde corretamente 2 < 3),
+ * essa heap deixa os elementos menores no topo. Essa comparação não é feita
  * diretamente com os elementos armazenados, mas sim usando um comparator. 
  * Dessa forma, dependendo do comparator, a heap pode funcionar como uma max-heap 
  * ou min-heap.
@@ -80,12 +80,29 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 	// ///////////// METODOS A IMPLEMENTAR
 	/**
 	 * Valida o invariante de uma heap a partir de determinada posicao, que pode
-	 * ser a raiz da heap ou de uma sub-heap. O heapify deve colocar os maiores
+	 * ser a raiz da heap ou de uma sub-heap. O heapify deve colocar os menores
 	 * (comparados usando o comparator) elementos na parte de cima da heap.
 	 */
 	private void heapify(int position) {
-		// TODO Implement htis method.
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int right = this.right(position);
+		int left = this.left(position);
+		
+		int largest = position;
+
+		if (left < this.size() &&
+				(this.comparator.compare(this.heap[left], this.heap[position]) > 0)){
+			largest = left;
+		}
+
+		if (right < this.size() &&
+				(this.comparator.compare( this.heap[right], this.heap[largest]) > 0)){
+			largest = right;
+		}
+
+		if (largest !=  position) {
+			Util.swap(this.heap, position, largest);
+			heapify(largest);
+		}
 	}
 
 	@Override
@@ -94,39 +111,79 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 		if (index == heap.length - 1) {
 			heap = Arrays.copyOf(heap, heap.length + INCREASING_FACTOR);
 		}
-		// /////////////////////////////////////////////////////////////////
-		// TODO Implemente a insercao na heap aqui.
-		throw new UnsupportedOperationException("Not implemented yet!");
+		
+		if(element == null) return;
+		
+		int i = ++this.index;
+
+		while(i > 0 && this.comparator.compare((this.heap[parent(i)]),element) < 0){
+			this.heap[i] = this.heap[parent(i)];
+			i = parent(i);
+		}
+		
+		this.heap[i] = element;
 	}
 
 	@Override
 	public void buildHeap(T[] array) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(array == null) return;
+
+		this.heap = Arrays.copyOf(array, array.length);
+		this.index = array.length - 1;
+
+		for (int i = this.size() / 2; i > -1; i--) {
+			heapify(i);
+		}
 	}
 
 	@Override
 	public T extractRootElement() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		T toReturn = null;
+		
+		if(!this.isEmpty()){
+			toReturn = this.heap[0];
+			this.heap[0] = this.heap[this.index--];
+			heapify(0);
+		}
+
+		return toReturn;
 	}
 
 	@Override
 	public T rootElement() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		T result = null;
+
+		if (!this.isEmpty()) {
+			result = this.heap[0];
+		}
+
+		return result;
 	}
 
 	@Override
 	public T[] heapsort(T[] array) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(array.length <= 0) return array;
+		
+		buildHeap(array);
+		
+		if (heap[0].compareTo(heap[index]) <= 0) {
+			
+			for (int i = 0; i < array.length; i++) 
+				array[i] = extractRootElement();
+			
+		} else {
+			
+			for (int i = array.length-1; i >= 0; i--) 
+				array[i] = extractRootElement();
+			
+		}
+		
+		return array;
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		return this.index + 1;
 	}
 
 	public Comparator<T> getComparator() {
