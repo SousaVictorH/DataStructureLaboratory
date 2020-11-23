@@ -13,6 +13,7 @@
 	<classpathentry kind="src" path="hashMap"/>
 	<classpathentry kind="src" path="binarySearchTree"/>
 	<classpathentry kind="src" path="heapBinaria"/>
+	<classpathentry kind="src" path="avl"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
