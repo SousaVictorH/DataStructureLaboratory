@@ -327,24 +327,26 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
         return list;
     }
 
-    @Override
-    public T[] postOrder() {
-        ArrayList<T> list = new ArrayList<T>();
-        list = postOrder(this.root,list);
-        
-        return this.toList(list);
-    }
+	@Override
+	public T[] postOrder() {
+		T[] result = (T[]) new Comparable[this.size()];
 
-    private ArrayList<T> postOrder(BSTNode<T> node, ArrayList<T> list){
-    	
-        if(!node.isEmpty()){
-            list.add(node.getData());
-            postOrder((BSTNode<T>) node.getLeft(),list);
-            postOrder((BSTNode<T>)node.getRight(),list);
-        }
-        
-        return list;
-    }
+		if (this.isEmpty()) return result;
+		
+		ArrayList<T> v = new ArrayList<T>();
+		postOrder(this.root, v);
+		v.toArray(result);
+
+		return result;
+	}
+
+	private void postOrder(BSTNode<T> node, ArrayList<T> list) {
+		if (node != null && !node.isEmpty()) {
+			postOrder((BSTNode<T>) node.getLeft(), list);
+			postOrder((BSTNode<T>) node.getRight(), list);
+			list.add(node.getData());
+		}
+	}
 
 	/**
 	 * This method is already implemented using recursion. You must understand
