@@ -1,5 +1,10 @@
 package adt.avltree;
 
+import java.awt.List;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.TreeMap;
+
 public class AVLCountAndFillImpl<T extends Comparable<T>> extends
 		AVLTreeImpl<T> implements AVLCountAndFill<T> {
 
@@ -34,8 +39,22 @@ public class AVLCountAndFillImpl<T extends Comparable<T>> extends
 
 	@Override
 	public void fillWithoutRebalance(T[] array) {
+		if(array == null || array.length == 0) return;
+		
+		Arrays.sort(array);
+		
+		Map<Integer, List> levels = new TreeMap<>();
+		
+		auxFillWithoutRebalance(levels, 0, array.length-1, 0, array);
+		
+		for(List list: levels.values()) {
+			((Map<Integer, List>) list).forEach((t) -> super.insert(t));
+		}
+	}
+
+	private void auxFillWithoutRebalance(Map<Integer, List> levels, int i, int j, int k, T[] array) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		
 	}
 
 }

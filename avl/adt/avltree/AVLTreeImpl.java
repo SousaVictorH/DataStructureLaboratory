@@ -2,7 +2,6 @@ package adt.avltree;
 
 import adt.bst.BSTImpl;
 import adt.bst.BSTNode;
-import adt.bt.Util;
 
 /**
  * 
@@ -35,5 +34,4 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Not implemented yet!");
 	}
-	
 }
