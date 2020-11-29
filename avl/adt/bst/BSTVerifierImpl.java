@@ -22,12 +22,26 @@ public class BSTVerifierImpl<T extends Comparable<T>> implements BSTVerifier<T> 
 
 	@Override
 	public boolean isBST() {
+		if(bst.size() <= 1) return true;	
 		return isBST(this.bst.root);
 	}
 
 	private boolean isBST(BSTNode<T> node) {
-		if(this.bst.isEmpty()) return true;
-		return false;
+		if(node.isEmpty()) return true;
+		boolean aux;
+		
+		if(!node.getLeft().isEmpty()) {
+			if(node.getData().compareTo(node.getLeft().getData()) < 1) return false;
+			else aux = isBST((BSTNode<T>) node.getLeft());
+			if(!aux) return false;
+		}
+		if(!node.getRight().isEmpty()) {
+			if(node.getData().compareTo(node.getRight().getData()) > 1) return false;
+			else aux = isBST((BSTNode<T>) node.getRight());
+			if(!aux) return false;
+		}
+		
+		return true;
 	}
 	
 }
