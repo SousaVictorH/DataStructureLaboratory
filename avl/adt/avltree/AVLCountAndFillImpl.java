@@ -1,6 +1,10 @@
 package adt.avltree;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import adt.bst.BSTNode;
 import adt.bt.Util;
@@ -41,29 +45,44 @@ public class AVLCountAndFillImpl<T extends Comparable<T>> extends
 	public void fillWithoutRebalance(T[] array) {
 		if(array == null || array.length == 0) return;
 
-		Arrays.sort(array);
+		List<T> arrayList = new ArrayList<>();
+		
+		for(T element: preOrder()) {
+			arrayList.add(element);
+		}
+		
+		for(T element: array) {
+			if(!arrayList.contains(element)) {
+				arrayList.add(element);
+			}
+		}
+		
+		this.root = new BSTNode<>();
+		Collections.sort(arrayList);
+		
 		Map<Integer, List<T>> levels = new TreeMap<>();
 
-		auxFillWithoutRebalance(levels, 0, array.length - 1, 0, array);
+		auxFillWithoutRebalance(levels, 0, arrayList.size() - 1, 0, arrayList);
 
 		for (Integer key : levels.keySet()) {
 			levels.get(key).forEach(t -> super.insert(t));
 		}
 	}
 
-	private void auxFillWithoutRebalance(Map<Integer, List<T>> map, int leftIndex,
-										 int rightIndex, int level, T[] array) {
+	private void auxFillWithoutRebalance(Map<Integer, List<T>> map, int leftIndex, int rightIndex, int level,
+			List<T> array) {
+		
 		if(leftIndex > rightIndex) return;
 
 		int mid = (leftIndex + rightIndex) / 2;
 		
 		if (!map.containsKey(level)) {
 			map.put(level, new ArrayList<>());
-			map.get(level).add(array[mid]);
+			map.get(level).add(array.get(mid));
 		} else {
-			map.get(level).add(array[mid]);
+			map.get(level).add(array.get(mid));
 		}
-
+		
 		auxFillWithoutRebalance(map, leftIndex, mid - 1, level + 1, array);
 		auxFillWithoutRebalance(map, mid + 1, rightIndex, level + 1, array);
 	}
@@ -78,11 +97,11 @@ public class AVLCountAndFillImpl<T extends Comparable<T>> extends
 			this.hangingRight(node);
 		}
 	}
-
+	
 	private void hangingLeft(BSTNode<T> node) {
 		BSTNode<T> temp;
 
-		if (this.calculateBalance((BSTNode<T>) node.getLeft()) > 0) {
+		if (this.calculateBalance((BSTNode<T>) node.getLeft()) >= 0) {
 			// Caso LL
 			temp = Util.rightRotation(node);
 			this.LLcounter++;
@@ -97,11 +116,11 @@ public class AVLCountAndFillImpl<T extends Comparable<T>> extends
 			super.root = temp;
 		}
 	}
-
+	
 	private void hangingRight(BSTNode<T> node) {
 		BSTNode<T> temp;
 
-		if (this.calculateBalance((BSTNode<T>) node.getRight()) < 0) {
+		if (this.calculateBalance((BSTNode<T>) node.getRight()) <= 0) {
 			// Caso RR
 			temp = Util.leftRotation(node);
 			this.RRcounter++;

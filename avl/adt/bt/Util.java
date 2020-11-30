@@ -11,28 +11,28 @@ public class Util {
 	 * @return - noh que se tornou a nova raiz
 	 */
 	public static <T extends Comparable<T>> BSTNode<T> leftRotation(BSTNode<T> node) {
-		BSTNode<T> rightNode = (BSTNode<T>) node.getRight();
-		BSTNode<T> leftNode = (BSTNode<T>) rightNode.getLeft();
+		BSTNode<T> newRoot = (BSTNode<T>) node.getRight();
+		BSTNode<T> leftChild = (BSTNode<T>) newRoot.getLeft();
 		BSTNode<T> parentNode = (BSTNode<T>) node.getParent();
 
 		if (parentNode != null) {
 			if (parentNode.getLeft().equals(node)) {
-				parentNode.setLeft(rightNode);
+				parentNode.setLeft(newRoot);
 			} else {
-				parentNode.setRight(rightNode);
+				parentNode.setRight(newRoot);
 			}
 		}
 
-		rightNode.setParent(parentNode);
-		rightNode.setLeft(node);
-		node.setParent(rightNode);
-		node.setRight(leftNode);
+		newRoot.setParent(parentNode);
+		node.setParent(newRoot);
+		node.setRight(leftChild);
+		newRoot.setLeft(node);
 
-		if (!leftNode.isEmpty()) {
-			leftNode.setParent(node);
+		if (leftChild != null) {
+			leftChild.setParent(node);
 		}
 
-		return rightNode;
+		return newRoot;
 	}
 
 	/**
@@ -41,28 +41,28 @@ public class Util {
 	 * @return noh que se tornou a nova raiz
 	 */
 	public static <T extends Comparable<T>> BSTNode<T> rightRotation(BSTNode<T> node) {
-		BSTNode<T> leftNode = (BSTNode<T>) node.getLeft();
-		BSTNode<T> rightNode = (BSTNode<T>) leftNode.getRight();
+		BSTNode<T> newRoot = (BSTNode<T>) node.getLeft();
+		BSTNode<T> rightChild = (BSTNode<T>) newRoot.getRight();
 		BSTNode<T> parentNode = (BSTNode<T>) node.getParent();
 
 		if (parentNode != null) {
 			if (parentNode.getLeft().equals(node)) {
-				parentNode.setLeft(leftNode);
+				parentNode.setLeft(newRoot);
 			} else {
-				parentNode.setRight(leftNode);
+				parentNode.setRight(newRoot);
 			}
 		}
 
-		leftNode.setParent(parentNode);
-		leftNode.setRight(node);
-		node.setParent(leftNode);
-		node.setLeft(rightNode);
+		newRoot.setParent(parentNode);
+		node.setParent(newRoot);
+		node.setLeft(rightChild);
+		newRoot.setRight(node);
 
-		if (!rightNode.isEmpty()) {
-			rightNode.setParent(node);
+		if (rightChild != null) {
+			rightChild.setParent(node);
 		}
 
-		return leftNode;
+		return newRoot;
 	}
 
 	public static <T extends Comparable<T>> T[] makeArrayOfComparable(int size) {

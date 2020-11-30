@@ -15,9 +15,6 @@ import adt.bt.Util;
 public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements
 		AVLTree<T> {
 
-	// TODO Do not forget: you must override the methods insert and remove
-	// conveniently.
-	
 	@Override
 	public void insert(T element) {
 		if (element != null) {
@@ -39,7 +36,8 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements
 			} else if(node.getData().compareTo(element) > 0){
 				insert((BSTNode<T>) node.getLeft(), element);
 			}
-			this.rebalance(node);		
+			
+			rebalance(node);
 		}
 	}
 	
@@ -91,6 +89,7 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements
 					}
 					
 				}
+				this.rebalanceUp(toRemove);
 				
 			} else {
 				
@@ -114,12 +113,7 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements
 
 	// AUXILIARY
 	protected int calculateBalance(BSTNode<T> node) {
-		int balance = 0;
-		
-		if(node.isEmpty()) return balance;
-		else balance = height(node.getLeft()) - height(node.getRight());
-		
-		return balance;
+		return node.isEmpty() ? 0 : height(node.getLeft()) - height(node.getRight());
 	}
 
 	// AUXILIARY
@@ -132,11 +126,11 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements
 			this.hangingRight(node);
 		}
 	}
-
+	
 	private void hangingLeft(BSTNode<T> node) {
 		BSTNode<T> temp;
 		
-		if(this.calculateBalance((BSTNode<T>) node.getLeft()) > 0) {
+		if(this.calculateBalance((BSTNode<T>) node.getLeft()) >= 0) {
 			// Caso LL
 			temp = Util.rightRotation(node);
 		} else {
@@ -153,7 +147,7 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements
 	private void hangingRight(BSTNode<T> node) {
 		BSTNode<T> temp;
 
-		if (calculateBalance((BSTNode<T>) node.getRight()) < 0) {
+		if (calculateBalance((BSTNode<T>) node.getRight()) <= 0) {
 			// Caso RR
 			temp = Util.leftRotation(node);
 		} else {
@@ -166,7 +160,7 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements
 			super.root = temp;
 		}
 	}
-	
+
 	// AUXILIARY
 	protected void rebalanceUp(BSTNode<T> node) {
 		BSTNode<T> temp = (BSTNode<T>) node.getParent();
@@ -176,4 +170,5 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements
 			temp = (BSTNode<T>) temp.getParent();
 		}
 	}
+	
 }
