@@ -1,7 +1,6 @@
 package adt.avltree;
 
-import java.awt.List;
-import java.util.Map;
+import java.util.*;
 
 import adt.bst.BSTNode;
 import adt.bt.Util;
@@ -40,9 +39,33 @@ public class AVLCountAndFillImpl<T extends Comparable<T>> extends
 
 	@Override
 	public void fillWithoutRebalance(T[] array) {
-		if(array!=null) {
-			
+		if(array == null || array.length == 0) return;
+
+		Arrays.sort(array);
+		Map<Integer, List<T>> levels = new TreeMap<>();
+
+		auxFillWithoutRebalance(levels, 0, array.length - 1, 0, array);
+
+		for (Integer key : levels.keySet()) {
+			levels.get(key).forEach(t -> super.insert(t));
 		}
+	}
+
+	private void auxFillWithoutRebalance(Map<Integer, List<T>> map, int leftIndex,
+										 int rightIndex, int level, T[] array) {
+		if(leftIndex > rightIndex) return;
+
+		int mid = (leftIndex + rightIndex) / 2;
+		
+		if (!map.containsKey(level)) {
+			map.put(level, new ArrayList<>());
+			map.get(level).add(array[mid]);
+		} else {
+			map.get(level).add(array[mid]);
+		}
+
+		auxFillWithoutRebalance(map, leftIndex, mid - 1, level + 1, array);
+		auxFillWithoutRebalance(map, mid + 1, rightIndex, level + 1, array);
 	}
 	
 	@Override
@@ -50,43 +73,47 @@ public class AVLCountAndFillImpl<T extends Comparable<T>> extends
 		int balance = super.calculateBalance(node);
 
 		if (balance > 1) {
-			this.heavierLeft(node);
+			this.hangingLeft(node);
 		} else if (balance < -1) {
-			this.heavierRight(node);
+			this.hangingRight(node);
 		}
 	}
 
-	private void heavierLeft(BSTNode<T> node) {
-		BSTNode<T> aux;
+	private void hangingLeft(BSTNode<T> node) {
+		BSTNode<T> temp;
 
 		if (this.calculateBalance((BSTNode<T>) node.getLeft()) > 0) {
-			aux = Util.rightRotation(node);
+			// Caso LL
+			temp = Util.rightRotation(node);
 			this.LLcounter++;
 		} else {
+			// Caso LR
 			Util.leftRotation((BSTNode<T>) node.getLeft());
-			aux = Util.rightRotation(node);
+			temp = Util.rightRotation(node);
 			this.LRcounter++;
 		}
 
-		if (aux.getParent() == null) {
-			super.root = aux;
+		if (temp.getParent() == null) {
+			super.root = temp;
 		}
 	}
 
-	private void heavierRight(BSTNode<T> node) {
-		BSTNode<T> aux;
+	private void hangingRight(BSTNode<T> node) {
+		BSTNode<T> temp;
 
 		if (this.calculateBalance((BSTNode<T>) node.getRight()) < 0) {
-			aux = Util.leftRotation(node);
+			// Caso RR
+			temp = Util.leftRotation(node);
 			this.RRcounter++;
 		} else {
+			// Caso RL
 			Util.rightRotation((BSTNode<T>) node.getRight());
-			aux = Util.leftRotation(node);
+			temp = Util.leftRotation(node);
 			this.RLcounter++;
 		}
 
-		if (aux.getParent() == null) {
-			super.root = aux;
+		if (temp.getParent() == null) {
+			super.root = temp;
 		}
 	}
 

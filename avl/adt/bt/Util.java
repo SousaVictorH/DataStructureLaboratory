@@ -11,29 +11,28 @@ public class Util {
 	 * @return - noh que se tornou a nova raiz
 	 */
 	public static <T extends Comparable<T>> BSTNode<T> leftRotation(BSTNode<T> node) {
-		BSTNode<T> pivot = (BSTNode<T>) node.getRight();
-		BSTNode<T> leftPivot = (BSTNode<T>) pivot.getLeft();
+		BSTNode<T> rightNode = (BSTNode<T>) node.getRight();
+		BSTNode<T> leftNode = (BSTNode<T>) rightNode.getLeft();
 		BSTNode<T> parentNode = (BSTNode<T>) node.getParent();
 
 		if (parentNode != null) {
 			if (parentNode.getLeft().equals(node)) {
-				parentNode.setLeft(pivot);
+				parentNode.setLeft(rightNode);
 			} else {
-				parentNode.setRight(pivot);
+				parentNode.setRight(rightNode);
 			}
 		}
 
-		pivot.setParent(parentNode);
-		node.setParent(pivot);
+		rightNode.setParent(parentNode);
+		rightNode.setLeft(node);
+		node.setParent(rightNode);
+		node.setRight(leftNode);
 
-		node.setRight(leftPivot);
-		pivot.setLeft(node);
-
-		if (leftPivot != null) {
-			leftPivot.setParent(node);
+		if (!leftNode.isEmpty()) {
+			leftNode.setParent(node);
 		}
 
-		return pivot;
+		return rightNode;
 	}
 
 	/**
@@ -42,29 +41,28 @@ public class Util {
 	 * @return noh que se tornou a nova raiz
 	 */
 	public static <T extends Comparable<T>> BSTNode<T> rightRotation(BSTNode<T> node) {
-		BSTNode<T> pivot = (BSTNode<T>) node.getLeft();
-		BSTNode<T> rightPivot = (BSTNode<T>) pivot.getRight();
+		BSTNode<T> leftNode = (BSTNode<T>) node.getLeft();
+		BSTNode<T> rightNode = (BSTNode<T>) leftNode.getRight();
 		BSTNode<T> parentNode = (BSTNode<T>) node.getParent();
 
 		if (parentNode != null) {
 			if (parentNode.getLeft().equals(node)) {
-				parentNode.setLeft(pivot);
+				parentNode.setLeft(leftNode);
 			} else {
-				parentNode.setRight(pivot);
+				parentNode.setRight(leftNode);
 			}
 		}
 
-		pivot.setParent(parentNode);
-		node.setParent(pivot);
+		leftNode.setParent(parentNode);
+		leftNode.setRight(node);
+		node.setParent(leftNode);
+		node.setLeft(rightNode);
 
-		node.setLeft(rightPivot);
-		pivot.setRight(node);
-
-		if (rightPivot != null) {
-			rightPivot.setParent(node);
+		if (!rightNode.isEmpty()) {
+			rightNode.setParent(node);
 		}
 
-		return pivot;
+		return leftNode;
 	}
 
 	public static <T extends Comparable<T>> T[] makeArrayOfComparable(int size) {

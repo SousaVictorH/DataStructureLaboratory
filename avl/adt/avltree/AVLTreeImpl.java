@@ -116,9 +116,8 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements
 	protected int calculateBalance(BSTNode<T> node) {
 		int balance = 0;
 		
-		if(!node.isEmpty()) {
-			balance = height(node.getLeft()) - height(node.getRight());
-		}
+		if(node.isEmpty()) return balance;
+		else balance = height(node.getLeft()) - height(node.getRight());
 		
 		return balance;
 	}
@@ -128,53 +127,53 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements
 		int balance = this.calculateBalance(root);
 		
 		if(balance > 1) {
-			this.heavierLeft(node);
+			this.hangingLeft(node);
 		} else if(balance < -1) {
-			this.heavierRight(node);
+			this.hangingRight(node);
 		}
 	}
 
-	private void heavierLeft(BSTNode<T> node) {
-		BSTNode<T> aux;
+	private void hangingLeft(BSTNode<T> node) {
+		BSTNode<T> temp;
 		
 		if(this.calculateBalance((BSTNode<T>) node.getLeft()) > 0) {
-			// LL
-			aux = Util.rightRotation(node);
+			// Caso LL
+			temp = Util.rightRotation(node);
 		} else {
-			// LR
+			// Caso LR
 			Util.leftRotation((BSTNode<T>) (node.getLeft()));
-			aux = Util.rightRotation(node);
+			temp = Util.rightRotation(node);
 		}
 		
-		if(aux.getParent() == null) {
-			super.root = aux;
+		if(temp.getParent() == null) {
+			super.root = temp;
 		}
 	}
 
-	private void heavierRight(BSTNode<T> node) {
-		BSTNode<T> aux;
+	private void hangingRight(BSTNode<T> node) {
+		BSTNode<T> temp;
 
 		if (calculateBalance((BSTNode<T>) node.getRight()) < 0) {
-			// RR
-			aux = Util.leftRotation(node);
+			// Caso RR
+			temp = Util.leftRotation(node);
 		} else {
-			// RL
+			// Caso RL
 			Util.rightRotation((BSTNode<T>) node.getRight());
-			aux = Util.leftRotation(node);
+			temp = Util.leftRotation(node);
 		}
 
-		if (aux.getParent() == null) {
-			super.root = aux;
+		if (temp.getParent() == null) {
+			super.root = temp;
 		}
 	}
 	
 	// AUXILIARY
 	protected void rebalanceUp(BSTNode<T> node) {
-		BSTNode<T> parent = (BSTNode<T>) node.getParent();
-
-		while (parent != null) {
-			rebalance(parent);
-			parent = (BSTNode<T>) parent.getParent();
+		BSTNode<T> temp = (BSTNode<T>) node.getParent();
+		
+		while (temp != null) {
+			rebalance(temp);
+			temp = (BSTNode<T>) temp.getParent();
 		}
 	}
 }

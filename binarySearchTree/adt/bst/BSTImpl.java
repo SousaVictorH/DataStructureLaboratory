@@ -28,11 +28,7 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
 	private int height (BTNode<T> node) {
 		
-		if(node.isEmpty()) {
-			return -1;
-		} else {
-			return 1 + Math.max(height(node.getLeft()), height(node.getRight()));
-		}
+		return node.isEmpty() ? -1 : 1 + Math.max(height(node.getLeft()), height(node.getRight()));
 		
 	}
 
@@ -341,11 +337,11 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 	}
 
 	private void postOrder(BSTNode<T> node, ArrayList<T> list) {
-		if (node != null && !node.isEmpty()) {
-			postOrder((BSTNode<T>) node.getLeft(), list);
-			postOrder((BSTNode<T>) node.getRight(), list);
-			list.add(node.getData());
-		}
+		if(node == null || node.isEmpty()) return;
+		
+		postOrder((BSTNode<T>) node.getLeft(), list);
+		postOrder((BSTNode<T>) node.getRight(), list);
+		list.add(node.getData());
 	}
 
 	/**
